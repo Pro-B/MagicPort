@@ -1,4 +1,3 @@
-
 ;; Full Screen
 ;;(setenv "PATH" (concat (getenv "PATH") "/home/travula/racket/bin/"))
 ;;(setq exec-path (append exec-path '("/home/travula/racket/bin/")))
@@ -15,9 +14,8 @@
         (sequence "|" "CANCELED(c)")))
 
 (require 'cl)
-(setq url-proxy-services '(("http" . "proxy.iiit.ac.in:8080")
-                         ("https" . "proxy.iiit.ac.in:8080")))
-
+;;(setq url-proxy-services '(("http" . "proxy.iiit.ac.in:8080")
+;;                         ("https" . "proxy.iiit.ac.in:8080")))
 
 (require 'package)
 
@@ -59,12 +57,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
+ '(ansi-color-names-vector
+   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(column-number-mode t)
+ 
  '(custom-enabled-themes (quote ("b97a01622103266c1a26a032567e02d920b2c697ff69d40b7d9956821ab666cc" default)))
- '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(custom-safe-themes
+   (quote
+    ("2022c5a92bbc261e045ec053aa466705999863f14b84c012a43f55a95bf9feb8" default)))
  '(initial-buffer-choice "~/MyStuff/ToDoList.org")
- '(quack-programs (quote ("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(quack-programs
+   (quote
+    ("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
  '(show-paren-mode t))
 
 (setq font-string 
@@ -81,13 +86,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 158 :width normal)))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 135 :width normal)))))
 
 ;; Don't use TABS for indentations.
 (setq-default indent-tabs-mode nil)
 
 ;; Set the number to the number of columns to use.
-(setq-default fill-column 79)
+(setq-default fill-column 80)
 
 ;; Add Autofill mode to mode hooks.
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -261,3 +266,15 @@
                          (jw/html-escape-attribute class)
                          (or desc "")))
           (_ (or desc ""))))))
+
+
+(set-face-attribute 'region nil :background "#0FF")
+  (add-to-list 'load-path "~/emacs/neotree")
+  (require 'neotree)
+  (global-set-key [f8] 'neotree-toggle)
+
+
+(load-library "ox-reveal")
+(setq org-reveal-root "file:////home/projit-normal/Documents/web-security/akash/submissions/ICISS2k17/presentation/lib-git-ignore/reveal.js")
+(add-to-list 'org-structure-template-alist
+             '("b" "#+TITLE: \n#+AUTHOR: ?\n#+DATE:"))
