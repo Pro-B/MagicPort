@@ -1,13 +1,27 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/projit-normal/.oh-my-zsh
+export ZSH="/Users/projit/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -20,7 +34,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# export UPDATE_ZSH_DAYS=30
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -29,10 +43,10 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -42,7 +56,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd.mm.yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -51,7 +65,11 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fasd zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+  git
+  fasd
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -81,59 +99,24 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+# Aliases personal
 alias c=clear
-alias cc='tput reset'
-alias l='ls'
-alias e=emacs
-alias cl='tput reset; ls'
-alias lc='tput reset; ls'
-alias op='xdg-open'
-alias py='python3'
-alias g++='g++ --std=c++14'
+alias l=ls
+alias ll='ls -al'
+alias lc='clear; ls'
+alias cl='clear; ls'
+alias fv='fasd -f -e vim'
+alias f='fasd -f -e'
+f bat todo
+alias moodle='open -a firefox http://moodle.iiit.ac.in'
+alias gmail='open -a firefox http://gmail.com'
+alias trello='open -a firefox http://trello.com'
+alias jn='jupyter notebook'
+# Path Changes
 
-function proxy_on {
-#printf -v no_proxy '%s,' 10.1.{1..255}.{1..255}
-export http_proxy="http://proxy.iiit.ac.in:8080"
-export https_proxy=$http_proxy
-export ftp_proxy=$http_proxy
-export no_proxy="localhost,127.0.0.1,iiit.ac.in,"
-export rsync_proxy=$http_proxy
-
-export HTTP_PROXY=$http_proxy
-export HTTPS_PROXY=$http_proxy
-export FTP_PROXY=$http_proxy
-export NO_PROXY=$no_proxy
-export RSYNC_PROXY=$http_proxy
-}
-
-function proxy_off {
-unset http_proxy https_proxy ftp_proxy no_proxy
-unset HTTP_PROXY HTTPS_PROXY FTP_PROXY NO_PROXY
-}
-
-proxy_on # Run proxy_on by default.
-
-export PATH=$PATH:/home/projit-normal/VMD
-export PATH=$PATH:/home/projit-normal/VMD/bin
-export PATH=$PATH:/home/projit-normal/VMD/lib
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH=$PATH:/home/projit-normal/NodeJS/node-v6.9.4-linux-x64/bin
-export BLUESPECDIR="/home/projit-normal/Bluespec/lib"
-export BLUESPEC_HOME="/home/projit-normal/Bluespec/"
-export LM_LICENSE_FILE=27000@10.4.21.49
-export PATH=$PATH:${BLUESPEC_HOME}/bin
-export PATH=$PATH:${BLUESPEC_HOME}/bin:${BLUESPEC_HOME}/util/flexlm/x86_64_re3
-export PATH="/home/projit-normal/jdk1.8.0_131/bin:$PATH"
-export NEO4J_HOME="/home/projit-normal/installations/neo4j-community-3.3.0"
-export PATH=$PATH:${NEO4J_HOME}/bin
-export PATH=$PATH:/home/projit-normal/installations/matlab_installation/R2017a/bin
-
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-
-
-###On Startup###
-grep "TODO" ~/MyStuff/ToDoList.org
-
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
