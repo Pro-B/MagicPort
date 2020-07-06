@@ -2,7 +2,7 @@
 syntax on
 set nocompatible              " be iMproved, required
 filetype off                  " required
-set clipboard+=unnamed
+" set clipboard+=unnamed
 filetype plugin on
 
 " Leader
@@ -13,12 +13,16 @@ set path+=**
 set wildmenu
 set cursorline
 
+"YCM
+let g:ycm_global_ycm_extra_conf="~/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf = 0
 
 " Create the tags file
 command! MakeTags !ctags -R .
 nmap <Leader>rt :TagbarToggle<CR>
 highlight Pmenu ctermbg=black guibg=black
 highlight Pmenu ctermfg=white guifg=white
+
 
 "File Browsing
 let g:netrew_banner=0
@@ -35,8 +39,9 @@ call vundle#begin()
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
 Plugin 'majutsushi/tagbar'
-Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'ycm-core/YouCompleteMe'
 call vundle#end()
 
 " MOVEMENT
@@ -49,6 +54,11 @@ set smartcase
 set ruler
 set number
 set relativenumber
+set title
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+set virtualedit=block
+set showmatch
 
 
 " Exit insert mode fast
@@ -65,6 +75,9 @@ set softtabstop=4
 
 " when indenting with '>', use 4 spaces width
 set shiftwidth=4
+" Round indentation to nearest shiftwidth
+set shiftround  
+
 " On pressing tab, insert 4 spaces
 set expandtab
 set backspace=indent,eol,start
@@ -76,6 +89,14 @@ set mouse=a
 set incsearch
 set hlsearch
 
+" Code Folding
+set foldmethod=indent
+set foldnestmax=3
+set nofoldenable
+
+" Backups and cache
+set dir=~/.cache/vim
+set backupdir=~/.cache/vim
 
 "Snippets
 " hint open file with gf
