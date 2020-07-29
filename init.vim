@@ -3,6 +3,8 @@ filetype off                  " required
 " set clipboard+=unnamed
 filetype plugin on
 
+" Leader
+let mapleader=","
 
 " File search
 if has("wildmenu")
@@ -41,6 +43,7 @@ set ruler
 nnoremap j gj
 nnoremap k gk
 set relativenumber
+set number
 set title
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -75,6 +78,8 @@ set backupdir=~/.cache/vim
 " Search
 set incsearch
 set hlsearch
+set ignorecase
+set smartcase
 
 " Code Folding
 set foldmethod=indent
